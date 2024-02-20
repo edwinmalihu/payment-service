@@ -2,6 +2,7 @@ package route
 
 import (
 	"log"
+	"payment-service/controller"
 	"payment-service/middleware"
 	"payment-service/repository"
 
@@ -17,6 +18,14 @@ func SetupRoute(db *gorm.DB) {
 
 	if err := paymentRepo.Migrate(); err != nil {
 		log.Fatal("paymet migrate error : ", err)
+	}
+
+	paymentController := controller.NewPaymentController(paymentRepo)
+
+	apiRoute := httpRoute.Group("/api")
+	{
+		apiRoute.POST("add/", paymentController.AddPayment)
+		apiRoute.DELETE("delete/", paymentController.DeletePayment)
 	}
 
 	httpRoute.Run(":8084")

@@ -32,6 +32,7 @@ func (Order) TableName() string {
 }
 
 type Payment struct {
+	gorm.Model
 	OrderID     uint      `json:"order_id"`
 	Order       Order     `gorm:"foreignKey:OrderID"`
 	Amount      float64   `json:"amount"`
