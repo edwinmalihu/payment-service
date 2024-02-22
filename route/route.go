@@ -24,9 +24,9 @@ func SetupRoute(db *gorm.DB) {
 
 	apiRoute := httpRoute.Group("/api")
 	{
-		apiRoute.POST("add/", paymentController.AddPayment)
-		apiRoute.DELETE("delete/", paymentController.DeletePayment)
+		apiRoute.POST("/add", paymentController.AddPayment)
+		apiRoute.DELETE("/delete", paymentController.DeletePayment)
 	}
 
-	httpRoute.Run(":8084")
+	httpRoute.Run(":8088")
 }
