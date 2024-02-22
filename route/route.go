@@ -1,7 +1,9 @@
 package route
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"payment-service/controller"
 	"payment-service/middleware"
 	"payment-service/repository"
@@ -28,5 +30,6 @@ func SetupRoute(db *gorm.DB) {
 		apiRoute.DELETE("/delete", paymentController.DeletePayment)
 	}
 
-	httpRoute.Run(":8088")
+	//httpRoute.Run(":8088")
+	httpRoute.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 }
